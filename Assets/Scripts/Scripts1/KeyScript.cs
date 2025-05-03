@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowButtonHint : MonoBehaviour
 {
@@ -6,42 +7,56 @@ public class ShowButtonHint : MonoBehaviour
     public GameObject OpenedDoor;
     public GameObject KOLOBOK;
     private Transform kolobokTransform;
-    public GameObject key1;
-    public GameObject key2;
-    public GameObject key3;
-    public GameObject key4;
+    public GameObject keys;
+    public GameObject Dialogue1;
+    public GameObject Dialogue2;
+    public GameObject Player;
+
+    private bool triggerKolobokRespawn;
+    private Vector3 newPosition;
 
     private void Start()
     {
         kolobokTransform = KOLOBOK.transform;
+        triggerKolobokRespawn = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) && !Dialogue1.activeSelf)
         {
-            key1.SetActive(false);
-            key2.SetActive(false);
-            key3.SetActive(false);
-            key4.SetActive(false);
+            Destroy(keys);
         }
-        if (buttonHint.activeSelf && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && buttonHint != null)
         {
-            OpenedDoor.SetActive(true);
-            KOLOBOK.SetActive(true);
+            if (buttonHint.activeSelf)
+            {
+                OpenedDoor.SetActive(true);
+                KOLOBOK.SetActive(true);
+                Dialogue2.SetActive(true);
+                Destroy(buttonHint);
+            }
+            
         }   
 
         if (KOLOBOK.activeSelf)
         {
-            Vector3 newPosition = kolobokTransform.position;
-            newPosition.x += 5f * Time.deltaTime;
+            newPosition = kolobokTransform.position;
+            newPosition.x += 3f * Time.deltaTime;
             kolobokTransform.position = newPosition;
+        }
+
+        if (Player.transform.position.x >= 60f && !triggerKolobokRespawn)
+        {
+            triggerKolobokRespawn = true;
+            KOLOBOK.transform.position = new Vector3(64f, newPosition.y, newPosition.z);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && buttonHint != null)
         {
             buttonHint.SetActive(true);
         }
@@ -49,7 +64,7 @@ public class ShowButtonHint : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && buttonHint != null)
         {
             buttonHint.SetActive(false);
         }

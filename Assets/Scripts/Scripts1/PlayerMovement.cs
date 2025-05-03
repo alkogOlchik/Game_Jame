@@ -8,7 +8,8 @@ public class PLayer_Movement : MonoBehaviour
     [SerializeField] private float speed = 3f;
     [SerializeField] private float jumpForce = 7f;
 
-
+    public GameObject Dialogue1;
+    public GameObject Dialogue2;
 
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
@@ -24,26 +25,29 @@ public class PLayer_Movement : MonoBehaviour
     
     void Update()
     {
-        
-        if (Input.GetButton("Horizontal"))
+        if (!Dialogue1.activeSelf && !Dialogue2.activeSelf)
         {
-            Run();
-        }
+            if (Input.GetButton("Horizontal"))
+            {
+                Run();
+            }
             
-        if (Input.GetButtonDown("Jump"))
-            Jump();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.enabled = false;
-            animator.enabled = true;
-            animator.SetTrigger("jump");
+            if (Input.GetButtonDown("Jump"))
+                Jump();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animator.enabled = false;
+                animator.enabled = true;
+                animator.SetTrigger("jump");
+            }
+            bool isWalking = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+            animator.SetBool("walking", isWalking);
+            if (transform.position.x >= 75f)
+            {
+                SceneManager.LoadScene("SecondLocation");
+            }  
         }
-        bool isWalking = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
-        animator.SetBool("walking", isWalking);
-        if (transform.position.x >= 70f)
-        {
-            SceneManager.LoadScene(1);
-        }
+
     }
     
     private void Run()

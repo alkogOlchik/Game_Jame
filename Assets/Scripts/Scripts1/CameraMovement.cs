@@ -8,10 +8,16 @@ public class Camera_Movement : MonoBehaviour
     [SerializeField] private Transform player;
     private Vector3 pos;
     public float posY;
-    private bool isStop;
+    public bool isStop;
     public float lenth;
 
-    private void Awake()
+    protected bool updateEnabled;
+    protected virtual void Start()
+    {
+        
+    }
+
+    protected virtual void Awake()
     {
         if (!player)
             player = FindObjectOfType<PLayer_Movement>().transform;
@@ -19,20 +25,25 @@ public class Camera_Movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        if (!isStop)
+        if (updateEnabled)
         {
-            pos.x = player.position.x;
-            pos.y = player.position.y + posY;
-            pos.z = -1f;
-            transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime);
+            if (!isStop)
+            {
+                pos.x = player.position.x;
+                pos.y = player.position.y + posY;
+                pos.z = -1f;
+                transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime);
+            }
+            if (player.position.x >= lenth)
+                isStop = true;
+            else
+                isStop = false;
         }
+        
+        
 
-        if (player.position.x >= lenth)
-            isStop = true;
-        else
-            isStop = false;
     
     }
 }
