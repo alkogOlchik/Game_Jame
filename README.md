@@ -8,7 +8,9 @@
 Гайд на ютуб https://www.youtube.com/live/I9QK_2QW9W8
 
 Клонирование репозитория
+``` bash
 git clone https://github.com/alkogOlchik/Game_Jame.git
+```
 Это создаст папку GameGam_EmptyProject с полным содержимым проекта
 
 Открытие в Unity Убедитесь, что у вас установлена подходящая версия Unity, желательно, чтобы была версия 22 года.
