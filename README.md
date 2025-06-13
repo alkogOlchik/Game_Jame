@@ -11,7 +11,6 @@
 2. [🛠️ Требования](#-требования)
 3. [🚀 Установка и запуск](#-установка-и-запуск)
 4. [🧰 Инструменты разработки](#-инструменты-разработки)
-5. [🌐 Ссылки и ресурсы](#-ссылки-и-ресурсы)
 
 ---
 
@@ -57,13 +56,3 @@ git clone https://github.com/alkogOlchik/Game_Jame.git
 | Rider             | 2020.3.4   | [Скачать](https://www.jetbrains.com/ru-ru/rider/download/other.html) |
 | Гайд по активации | 2020       | [YouTube](https://www.youtube.com/watch?v=HH3mgck--eA)               |
 
-## Ссылки и ресурсы
-🕹️ Игровая страница: itch.io
-
-💾 Репозиторий: GitHub
-
-🎓 Гайд по запуску Unity проекта: YouTube
-
-🛠️ GitHub Desktop: desktop.github.com
-
-👩‍💻 Rider IDE (до 2021): скачать
